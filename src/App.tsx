@@ -1,46 +1,50 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, View, Text, StatusBar} from 'react-native';
+import React, {FC} from 'react';
+import {SafeAreaView, StatusBar} from 'react-native';
+import styled from 'styled-components/native';
 
-const App = () => {
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+const reactLogo = <Icon name="react" size={80} />;
+
+const SafeArea = styled(SafeAreaView)`
+    flex: 1;
+    background-color: #f5f5f5;
+  `,
+  Content = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  `,
+  Logo = styled.Text`
+    color: #61dbfb;
+  `,
+  Title = styled.Text`
+    font-size: 24px;
+    font-weight: 600;
+    color: #444;
+  `,
+  Footer = styled.Text`
+    color: #666;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    padding: 5px;
+    border-top-width: 2px;
+    border-top-color: #b22222;
+  `;
+
+const App: FC = () => {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <SafeAreaView style={styles.flex}>
-        <View style={styles.content}>
-          <Text style={styles.title}>TypeScript template</Text>
-        </View>
-
-        <Text style={styles.footer}>&copy; 2020, ATA, MediaTestLab</Text>
-      </SafeAreaView>
+      <SafeArea>
+        <Content>
+          <Logo>{reactLogo}</Logo>
+          <Title>Styled Components</Title>
+        </Content>
+        <Footer>&copy; 2020, ATA, MediaTestLab</Footer>
+      </SafeArea>
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  flex: {
-    flex: 1,
-    backgroundColor: '#ccc',
-  },
-  content: {
-    flex: 1,
-    backgroundColor: '#ccc',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: '#444',
-  },
-  footer: {
-    color: '#666',
-    fontSize: 12,
-    fontWeight: '600',
-    textAlign: 'left',
-    padding: 5,
-    borderTopWidth: 2,
-    borderTopColor: '#B22222',
-  },
-});
 
 export default App;
