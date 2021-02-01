@@ -1,6 +1,7 @@
-import React, {FC} from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
+import React, {FC, useState, useEffect} from 'react';
+import {SafeAreaView, StatusBar, useWindowDimensions} from 'react-native';
 import styled from 'styled-components/native';
+// import Orientation from 'react-native-orientation-locker';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const reactLogo = <Icon name="react" size={80} />;
@@ -22,6 +23,10 @@ const SafeArea = styled(SafeAreaView)`
     font-weight: 600;
     color: #444;
   `,
+  Paragraph = styled.Text`
+    color: #666;
+    font-size: 16px;
+  `,
   Footer = styled.Text`
     color: #666;
     font-size: 12px;
@@ -29,19 +34,31 @@ const SafeArea = styled(SafeAreaView)`
     text-align: left;
     padding: 5px;
     border-top-width: 2px;
-    border-top-color: #b22222;
+    border-top-color: #61dbfb;
   `;
 
 const App: FC = () => {
+  const {width, height} = useWindowDimensions();
+  const [isPortrait, setIsPortrait] = useState(width < height ? true : false);
+
+  useEffect(() => {
+    const value = width < height ? true : false;
+    setIsPortrait(value);
+  }, [width, height]);
+
   return (
     <>
       <StatusBar barStyle="light-content" />
       <SafeArea>
         <Content>
           <Logo>{reactLogo}</Logo>
-          <Title>Styled Components</Title>
+          <Title>React Native / TypeScript</Title>
+          <Paragraph>{isPortrait ? 'Portrait' : 'Landscape'}</Paragraph>
+          <Paragraph>
+            Device dimensions: {width.toFixed()} x {height.toFixed()}
+          </Paragraph>
         </Content>
-        <Footer>&copy; 2020, ATA, MediaTestLab</Footer>
+        <Footer>&copy; 2020, ata@mediatestlab</Footer>
       </SafeArea>
     </>
   );
